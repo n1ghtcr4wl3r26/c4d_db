@@ -588,10 +588,10 @@ IS
       IF aux = '0'
       THEN
          res :=
-            '<table class=soloborde width=500 bgColor=#c1c1ff align=center><TR><TD style="color:#FFF" class=FondoBaja align=middle>ERROR AL DAR DE BAJA EL NRO DE CARPETA</TD></TR></table>';
+            'ERROR';
       ELSE
          res :=
-            '<table class=soloborde width=500 bgColor=#c1c1ff align=center><TR><TD style="color:#FFF" class=FondoCeleste align=middle>BAJA DE CARPETA SATISFACTORIA</TD></TR></table>';
+            'OK';
       END IF;
 
       RETURN res;
@@ -625,10 +625,10 @@ IS
       IF aux = '0'
       THEN
          res :=
-            '<table class=soloborde width=500 bgColor=#c1c1ff align=center><TR><TD style="color:#FFF" class=FondoBaja align=middle>ERROR AL REHABILITAR EL NRO DE CARPETA</TD></TR></table>';
+            'ERROR';
       ELSE
          res :=
-            '<table class=soloborde width=500 bgColor=#c1c1ff align=center><TR><TD style="color:#FFF" class=FondoCeleste align=middle>REHABILITACI&Oacute;N DE CARPETA SATISFACTORIA</TD></TR></table>';
+            'OK';
       END IF;
 
       RETURN res;
@@ -662,7 +662,10 @@ IS
       THEN
          RETURN '0';
       ELSE
-         SELECT    '<table width="500px" align="center" class="soloborde" bgcolor="#C1C1FF" id="c"><tr><td colspan="4" align=center><b>DUI ASOCIADA DEL DOCUMENTO</b></td></tr><tr><th>N&Uacute;MERO <BR />CARPETA</th><th>DUI</th><th>ADUANA</th><th>FECHA</th></tr><tr><td>'
+         SELECT    '<table class="table table-striped table-hover">'
+                || '<thead><tr><td colspan="3" align="center"><b>DUI ASOCIADA DEL DOCUMENTO</b></td></tr></thead>'
+                || '<tbody><tr><th align="center">N&Uacute;MERO CARPETA</th><th align="center">DUI</th><th align="center">ADUANA</th><th align="center">FECHA</th></tr>'
+                || '<tr><td>'
                 || s.sad_att_ref
                 || '</td><td>'
                 || g.sad_reg_serial
@@ -674,7 +677,7 @@ IS
                 || u.cuo_nam
                 || '</td><td>'
                 || TO_CHAR (g.sad_reg_date, 'dd/mm/yyyy')
-                || '</td></tr></table>'
+                || '</td></tr></tbody></table>'
            INTO res
            FROM sad_trr s, sad_gen g, uncuotab u
           WHERE s.sad_att_cod = 'C44'
